@@ -1,0 +1,18 @@
+/* Links */
+
+/* Layout automático */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 24px;
+gap: 16px;
+
+width: 588px;
+height: 320px;
+
+
+/* Auto layout por dentro */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
