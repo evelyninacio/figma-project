@@ -1,10 +1,13 @@
+/*Define uma função chamada toggleMode*/
 function toggleMode() {
-  /*document é nossa página inteira representada em formato de objeto js
-  .documentElement acessa a tag html que existe dentro do objeto document*/
-
+  /*
+  Cria uma constante html que referencia o elemento <html> (a variável não será reatribuída)
+  document é o objeto global que representa o documento carregado (a página). document.documentElement retorna o nó raiz do documento — normalmente a tag <html>*/
   const html = document.documentElement
 
-  /*função toggle que verifica, remove ou adiciona a classe light ao elemento html*/
+  /*
+  classList é objeto especial que contém todas as classes CSS aplicadas ao elemento e fornece métodos prontos para manipulá-las (add, remove, toggle)
+  função toggle que verifica, remove ou adiciona a classe light ao elemento html*/
 
   html.classList.toggle("light")
 
