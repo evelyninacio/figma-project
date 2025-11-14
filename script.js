@@ -1,38 +1,49 @@
-/*Define uma função chamada toggleMode*/
+// ======================================================
+//  MODO LIGHT/DARK COM PERSISTÊNCIA ENTRE PÁGINAS
+// ======================================================
+
+// Recupera o tema salvo (caso exista)
+const savedTheme = localStorage.getItem("theme")
+
+// Se existir um tema salvo (light), aplica no <html>
+if (savedTheme === "light") {
+  document.documentElement.classList.add("light")
+}
+
+// ======================================================
+//  FUNÇÃO QUE ALTERA O TEMA
+// ======================================================
+
 function toggleMode() {
-  /*
-  Cria uma constante html que referencia o elemento <html> (a variável não será reatribuída)
-  document é o objeto global que representa o documento carregado (a página). document.documentElement retorna o nó raiz do documento — normalmente a tag <html>*/
+  // html = elemento raiz do documento
   const html = document.documentElement
 
-  /*
-  classList é objeto especial que contém todas as classes CSS aplicadas ao elemento e fornece métodos prontos para manipulá-las (add, remove, toggle)
-  função toggle que verifica, remove ou adiciona a classe light ao elemento html*/
-
+  // Alterna (adiciona/remove) a classe "light"
   html.classList.toggle("light")
 
-  /*criando condicional manualmente para caso não existisse a função toggle pronta:
-
+  // ------------------------------------------------------
+  //  PERSISTÊNCIA DO TEMA
+  // ------------------------------------------------------
   if (html.classList.contains("light")) {
-    html.classList.remove("light")
+    localStorage.setItem("theme", "light")
   } else {
-    html.classList.add("light")
-  }*/
+    localStorage.setItem("theme", "dark")
+  }
 
-  // pega a tag html
-  // querySelector é uma uma função do documento que pesquisa pelo seletor css
+  // ======================================================
+  //  TROCA DE IMAGEM DO PERFIL (APENAS SE EXISTIR)
+  // ======================================================
+
+  // Aqui impedimos erro caso a página sobre.html não tenha #profile
   const imagem = document.querySelector("#profile img")
 
-  //substitui a imagem com a mesma lógina anterior
-  if (html.classList.contains("light")) {
-    // se tiver no light mode adiciona uma nova imagem
-    // a função setAttribute faz alteração em algum tipo de atributo que deve ser passado por parâmetro
-
-    imagem.setAttribute("src", "./assets/avatar-light.png")
-    imagem.setAttribute("alt", "Foto de perfil no modo light")
-  } else {
-    // se não tiver no light mode mantem a imagem inicial
-    imagem.setAttribute("src", "./assets/avatar.png")
-    imagem.setAttribute("alt", "Foto de perfil no modo dark")
+  if (imagem) {
+    if (html.classList.contains("light")) {
+      imagem.setAttribute("src", "./assets/avatar-light.png")
+      imagem.setAttribute("alt", "Foto de perfil no modo light")
+    } else {
+      imagem.setAttribute("src", "./assets/avatar.png")
+      imagem.setAttribute("alt", "Foto de perfil no modo dark")
+    }
   }
 }
